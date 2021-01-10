@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+require('dotenv').config();
 
 module.exports = {
   entry: './src/index.js',
@@ -10,7 +11,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new Dotenv(),
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify(process.env.API_URL || ''),
+    }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       base: '/',
@@ -19,7 +22,7 @@ module.exports = {
   ],
   devtool: 'inline-source-map',
   devServer: {
-    port: process.env.PORT || 3000,
+    port: process.env.PORT,
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
