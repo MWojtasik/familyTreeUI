@@ -1,6 +1,7 @@
 import {HttpService} from './HttpService.js';
 
 const apiUrl = process.env.API_URL || '';
+console.log('apiUrl',apiUrl);
 
 export const endpoints = {
   getLeaves: () => HttpService.get(`${apiUrl}/api/leaves/`),
