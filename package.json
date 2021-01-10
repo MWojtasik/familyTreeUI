@@ -8,7 +8,7 @@
   },
   "scripts": {
     "heroku-prebuild": "npm install --dev",
-    "dev": "webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
