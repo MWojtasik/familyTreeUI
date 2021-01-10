@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+require('dotenv').config();
 
 module.exports = {
   entry: './src/index.js',
@@ -17,7 +18,7 @@ module.exports = {
   ],
   devtool: 'inline-source-map',
   devServer: {
-    port: 3000,
+    port: process.env.PORT,
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
