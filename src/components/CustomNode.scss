@@ -1,0 +1,36 @@
+.custom-node {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2em;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: RobotoBold, Helvetica, sans-serif;
+
+  &--dead {
+    background-color: #a2a2a2;
+  }
+
+  &:hover {
+    .custom-node__action-panel {
+      display: block;
+    }
+  }
+
+  &__action-panel {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  &__dates {
+    padding: 0.2em;
+    font-size: 0.9em;
+    display: flex;
+    align-items: flex-start;
+    font-family: RobotoLight, Helvetica, sans-serif;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,38 @@
+.control-panel {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 4;
+  font-size: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    margin-bottom: 1em;
+  }
+
+  &__title {
+    display: flex;
+    text-align: center;
+    font-family: RobotoBold, Helvetica, sans-serif;
+    font-size: 1.2em;
+    padding: 1em;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    width: 140px;
+    border-radius: 0;
+
+    &--full-width {
+      width: auto;
+    }
+  }
+}

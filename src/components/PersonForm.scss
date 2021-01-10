@@ -1,0 +1,30 @@
+.add-person-form {
+  overflow: hidden;
+  max-height: 100vh;
+  padding: 1em;
+  background-color: #FFFFFF;
+  //transition: max-height 5s ease
+
+  &--hidden {
+    max-height: 0;
+    padding: 0;
+  }
+
+  &__label {
+    font-size: 1.5em;
+  }
+
+  &__add-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__item {
+    padding-bottom: 1em;
+  }
+
+  &__death-picker {
+    display: flex;
+    align-items: baseline;
+  }
+}
