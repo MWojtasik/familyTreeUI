@@ -32,6 +32,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -73,6 +78,6 @@ module.exports = {
     alias: {
       src: path.resolve(__dirname, 'src/')
     },
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss','.tsx', '.ts']
   }
 };

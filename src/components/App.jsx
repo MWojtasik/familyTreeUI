@@ -8,12 +8,12 @@ import ReactFlow, {
 import {CustomNode} from 'src/components/CustomNode.jsx';
 import {ControlPanel} from 'src/components/ControlPanel.jsx';
 import {StylesProvider} from '@material-ui/styles';
-import {store} from 'src/redux/store.js';
+import {store} from 'src/redux/store.ts';
 import {Provider, useDispatch, useSelector} from 'react-redux';
-import {addEdge, getData, removeEdge} from 'src/redux/main/mainActions.js';
+import {addEdge, getData, removeEdge} from 'src/redux/main/mainActions.ts';
 import {endpoints} from 'src/endpoints.js';
 import {createEdge} from 'src/elementsService/createEdge.js';
-import {EditDialog} from 'src/components/EditDialog.jsx';
+import {EditDialog} from 'src/components/EditDialog.tsx';
 
 const onLoad = (reactFlowInstance) => {
   reactFlowInstance.fitView();

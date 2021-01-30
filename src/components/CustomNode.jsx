@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {useDispatch, useSelector} from 'react-redux';
-import {openEditDialog, setElements} from 'src/redux/main/mainActions.js';
+import {openEditDialog, setElements} from 'src/redux/main/mainActions.ts';
 import {endpoints} from 'src/endpoints.js';
 import {removeElement} from 'src/elementsService/removeElement.js';
 import EditIcon from '@material-ui/icons/Edit';

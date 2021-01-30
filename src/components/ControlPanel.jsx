@@ -5,7 +5,7 @@ import {Button} from '@material-ui/core';
 import {PersonForm} from 'src/components/PersonForm.jsx';
 import {endpoints} from 'src/endpoints.js';
 import {useDispatch, useSelector} from 'react-redux';
-import {addEdge, getData, removeEdge, setElements} from 'src/redux/main/mainActions.js';
+import {addEdge, getData, removeEdge, setElements} from 'src/redux/main/mainActions.ts';
 import {getLayoutedElementsFromLeaves} from 'src/elementsService/getLayoutedElements.js';
 import AddIcon from '@material-ui/icons/Add';
 
