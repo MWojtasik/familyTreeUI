@@ -1,4 +1,4 @@
-import { Edge } from 'react-flow-renderer';
+import {Edge, Elements} from 'react-flow-renderer';
 
 export const START_FETCHING_DATA = 'START_FETCHING_DATA';
 export const FETCHING_DATA_FAILURE = 'FETCHING_DATA_FAILURE';
@@ -13,7 +13,7 @@ export type State = {
 };
 
 export type MainState = Readonly<{
-  elements: ReadonlyArray<object>,
+  elements: Elements,
   isFetchingData: boolean,
   isEditDialogOpen: boolean,
 }>;
@@ -42,7 +42,7 @@ interface RemoveEdgeAction {
 
 interface SetElementsAction {
   type: typeof SET_ELEMENTS,
-  payload: object[]
+  payload: Elements
 }
 
 interface StartFetchingDataAction {

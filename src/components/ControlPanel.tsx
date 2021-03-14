@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {ReactElement, useCallback, useMemo, useState} from 'react';
 import './ControlPanel.scss';
 import PropTypes from 'prop-types';
 import {Button} from '@material-ui/core';
@@ -8,26 +8,25 @@ import {removeEdge, setElements} from 'src/redux/main/mainActions';
 import {getLayoutedElementsFromLeaves} from 'src/elementsService/getLayoutedElements.js';
 import AddIcon from '@material-ui/icons/Add';
 import {Person} from '../types';
-import {FlowElement, Edge} from 'react-flow-renderer';
+import {FlowElement, Edge, Node, Elements} from 'react-flow-renderer';
 import {State} from '../redux/main/types';
+import {createNode} from '../elementsService/createNode';
 
 type ControlPanelProps = {
   selectedNode: FlowElement
 }
 
-export const ControlPanel = ({selectedNode} : ControlPanelProps) => {
+export const ControlPanel = ({selectedNode} : ControlPanelProps): ReactElement => {
   const elements = useSelector((state: State) => state.main.elements);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const dispatch = useDispatch();
 
   const onAddNewPerson = useCallback((person: Person) => {
-
-    // TODO: dodać kolejny element
-    // endpoints.addPerson(person)
-    //   .then(() => {
-    //     dispatch(getData());
-    //   });
-  }, [dispatch]);
+    const createdNode: Node = createNode(person);
+    const newElements: Elements = [...elements];
+    newElements.push(createdNode);
+    dispatch(setElements(newElements));
+  }, [dispatch, elements]);
 
   const onEdgeRemove = useCallback(() => {
     dispatch(removeEdge(selectedNode as Edge));

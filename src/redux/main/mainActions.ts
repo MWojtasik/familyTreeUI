@@ -5,7 +5,7 @@ import {
   OPEN_EDIT_DIALOG,
   REMOVE_EDGE, SET_ELEMENTS,
 } from './types';
-import {Edge} from 'react-flow-renderer';
+import {Edge, Elements} from 'react-flow-renderer';
 
 export const openEditDialog = () : MainActionTypes => {
   return {
@@ -34,7 +34,7 @@ export const removeEdge = (edge: Edge) : MainActionTypes => {
   };
 };
 
-export const setElements = (elements: object[]) : MainActionTypes => {
+export const setElements = (elements: Elements) : MainActionTypes => {
   return {
     type: SET_ELEMENTS,
     payload: elements,

@@ -1,15 +1,18 @@
 import {Person} from '../types';
+import {Node} from 'react-flow-renderer';
+import { v1 as uuid } from 'uuid';
 
-export function createElement({id, name, lastName, birth, death} : Person) {
+export function createNode({name, lastName, birth, death} : Person): Node {
+  const id = uuid();
   return {
-    id: `${id}`,
+    id,
     type: 'personNode',
     data: {
       name: name,
       lastName: lastName,
       birth: birth,
       death: death,
-      id: `${id}`,
+      id,
     },
     position: { x: 0, y: 0 }
   };

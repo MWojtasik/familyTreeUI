@@ -1,38 +1,40 @@
-import React, {useRef, useState} from 'react';
+import React, {MouseEvent, ReactElement, useRef, useState} from 'react';
 import './App.scss';
 import ReactFlow, {
-  MiniMap,
-  Controls,
   Background,
+  Connection,
+  ConnectionLineType, Controls,
+  Edge,
+  FlowElement,
+  MiniMap,
+  OnLoadParams
 } from 'react-flow-renderer';
-import {CustomNode} from 'src/components/CustomNode.jsx';
-import {ControlPanel} from 'src/components/ControlPanel.tsx';
-import {StylesProvider} from '@material-ui/styles';
-import {store} from 'src/redux/store.ts';
 import {Provider, useDispatch, useSelector} from 'react-redux';
-import {addEdge} from 'src/redux/main/mainActions.ts';
-import {createEdge} from 'src/elementsService/createEdge.js';
-import {EditDialog} from 'src/components/EditDialog.tsx';
+import {State} from '../redux/main/types';
+import {createEdge} from '../elementsService/createEdge';
+import {addEdge} from '../redux/main/mainActions';
+import {store} from '../redux/store';
+import {StylesProvider} from '@material-ui/styles';
+import {CustomNode} from './CustomNode';
+import {ControlPanel} from './ControlPanel';
+import {EditDialog} from './EditDialog';
 
-const onLoad = (reactFlowInstance) => {
+const onLoad = (reactFlowInstance: OnLoadParams) => {
   reactFlowInstance.fitView();
 };
 
-export function App() {
-  const elements = useSelector(state => state.main.elements);
+export const App = (): ReactElement => {
+  const elements = useSelector((state: State) => state.main.elements);
   const dispatch = useDispatch();
-  const [selectedNode, setSelectedNode] = useState();
+  const [selectedNode, setSelectedNode] = useState<FlowElement>();
   const componentRef = useRef();
 
-  const onSelectElement = (event, element) => {
+  const onSelectElement = (event: MouseEvent, element: FlowElement) => {
     setSelectedNode(element);
   };
 
-  const onConnect = (params) => {
-    const {source: parentId, target: childId} = params;
-    const source = { id: parentId };
-    const target = { id: childId };
-    const edge = createEdge({source, target});
+  const onConnect = (connection: Edge | Connection) => {
+    const edge = createEdge(connection);
     dispatch(addEdge(edge));
   };
 
@@ -48,7 +50,7 @@ export function App() {
             onElementClick={onSelectElement}
             snapToGrid={true}
             snapGrid={[15, 15]}
-            connectionLineType="smoothstep"
+            connectionLineType={ConnectionLineType.SmoothStep}
             nodeTypes={{personNode: CustomNode}}
             style={{ background: '#1A192B' }}
           >
@@ -65,4 +67,4 @@ export function App() {
       </StylesProvider>
     </Provider>
   );
-}
+};

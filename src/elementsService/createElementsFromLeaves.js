@@ -1,10 +1,10 @@
-import {createEdge} from 'src/elementsService/createEdge.js';
-import {createElement} from 'src/elementsService/createElement.ts';
+import {createEdge} from 'src/elementsService/createEdge.ts';
+import {createNode} from 'src/elementsService/createNode.ts';
 
 const getNodeIndexInElements = (elements, node) => elements.findIndex((element) => element.id === `${node.id}`);
 
 function addNodeToElements(elements, node) {
-  const element = createElement(node);
+  const element = createNode(node);
   elements.push(element);
   for (const parent of node.parents) {
     const edge = createEdge({ source: parent, target: node});
