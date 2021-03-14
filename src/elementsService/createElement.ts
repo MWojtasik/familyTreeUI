@@ -1,4 +1,4 @@
-import {Person} from "../types";
+import {Person} from '../types';
 
 export function createElement({id, name, lastName, birth, death} : Person) {
   return {

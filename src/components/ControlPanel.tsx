@@ -7,9 +7,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {removeEdge, setElements} from 'src/redux/main/mainActions';
 import {getLayoutedElementsFromLeaves} from 'src/elementsService/getLayoutedElements.js';
 import AddIcon from '@material-ui/icons/Add';
-import {Person} from "../types";
-import {FlowElement, Edge} from "react-flow-renderer";
-import {State} from "../redux/main/types";
+import {Person} from '../types';
+import {FlowElement, Edge} from 'react-flow-renderer';
+import {State} from '../redux/main/types';
 
 type ControlPanelProps = {
   selectedNode: FlowElement
@@ -30,7 +30,7 @@ export const ControlPanel = ({selectedNode} : ControlPanelProps) => {
   }, [dispatch]);
 
   const onEdgeRemove = useCallback(() => {
-      dispatch(removeEdge(selectedNode as Edge));
+    dispatch(removeEdge(selectedNode as Edge));
   }, [dispatch, selectedNode]);
 
   const onCleanLayout = () => {
@@ -40,7 +40,7 @@ export const ControlPanel = ({selectedNode} : ControlPanelProps) => {
   const edgeRemovalPanel = useMemo(() => {
     if (!selectedNode) return null;
 
-    if ("source" in selectedNode) return (
+    if ('source' in selectedNode) return (
       <Button
         variant="contained"
         color="primary"
@@ -76,7 +76,7 @@ export const ControlPanel = ({selectedNode} : ControlPanelProps) => {
       <PersonForm isVisible={isFormVisible} onSubmit={onAddNewPerson} label={'Add new person'} icon={<AddIcon />}/>
     </div>
   );
-}
+};
 
 ControlPanel.propTypes = {
   selectedNode: PropTypes.shape({

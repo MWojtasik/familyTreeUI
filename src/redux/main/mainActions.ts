@@ -4,8 +4,8 @@ import {
   MainActionTypes,
   OPEN_EDIT_DIALOG,
   REMOVE_EDGE, SET_ELEMENTS,
-} from "./types";
-import {Edge} from "react-flow-renderer";
+} from './types';
+import {Edge} from 'react-flow-renderer';
 
 export const openEditDialog = () : MainActionTypes => {
   return {
