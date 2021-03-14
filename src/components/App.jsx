@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './App.scss';
 import ReactFlow, {
   MiniMap,
@@ -6,12 +6,11 @@ import ReactFlow, {
   Background,
 } from 'react-flow-renderer';
 import {CustomNode} from 'src/components/CustomNode.jsx';
-import {ControlPanel} from 'src/components/ControlPanel.jsx';
+import {ControlPanel} from 'src/components/ControlPanel.tsx';
 import {StylesProvider} from '@material-ui/styles';
 import {store} from 'src/redux/store.ts';
 import {Provider, useDispatch, useSelector} from 'react-redux';
-import {addEdge, getData, removeEdge} from 'src/redux/main/mainActions.ts';
-import {endpoints} from 'src/endpoints.js';
+import {addEdge} from 'src/redux/main/mainActions.ts';
 import {createEdge} from 'src/elementsService/createEdge.js';
 import {EditDialog} from 'src/components/EditDialog.tsx';
 
@@ -25,10 +24,6 @@ export function App() {
   const [selectedNode, setSelectedNode] = useState();
   const componentRef = useRef();
 
-  useEffect(() => {
-    dispatch(getData());
-  }, [dispatch]);
-
   const onSelectElement = (event, element) => {
     setSelectedNode(element);
   };
@@ -39,11 +34,6 @@ export function App() {
     const target = { id: childId };
     const edge = createEdge({source, target});
     dispatch(addEdge(edge));
-    endpoints.connect(parentId, childId)
-      .catch(() => {
-        console.error('Something went wrong');
-        dispatch(removeEdge(edge));
-      });
   };
 
   return (
@@ -64,12 +54,8 @@ export function App() {
           >
             <ControlPanel selectedNode={selectedNode}/>
             <MiniMap
-              nodeStrokeColor={() => {
-                return '#000000';
-              }}
-              nodeColor={() => {
-                return '#FFFFFF';
-              }}
+              nodeStrokeColor={() => {return '#000000';}}
+              nodeColor={() => {return '#FFFFFF';}}
             />
             <Controls />
             <Background color="#aaa" gap={16} />

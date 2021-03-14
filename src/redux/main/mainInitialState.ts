@@ -1,4 +1,4 @@
-import {MainState} from "./types";
+import { MainState } from './types';
 
 export const mainInitialState: MainState = {
   elements: [],

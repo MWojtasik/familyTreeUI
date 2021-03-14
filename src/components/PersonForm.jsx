@@ -9,20 +9,20 @@ import moment from 'moment';
 moment.locale('en');
 
 export function PersonForm({isVisible, onSubmit, label, person, icon}) {
-  const isPersonDead = person?.dateOfDeath;
+  const isPersonDead = person?.death;
   const [enableDeathPicker, setEnableDeathPicker] = useState(person ? !!isPersonDead : false);
   const [name, setName] = useState(person ? person.name : '');
-  const [surname, setSurname] = useState(person ? person.surname : '');
-  const [birthDate, setBirthDate] = useState(person ? moment(person.dateOfBirth, 'DD-MM-YYYY') : moment());
-  const [deathDate, setDeathDate] = useState(person ? (isPersonDead ? moment(person.dateOfDeath, 'DD-MM-YYYY') : moment()) : moment());
+  const [lastName, setlastName] = useState(person ? person.lastName : '');
+  const [birthDate, setBirthDate] = useState(person ? moment(person.birth, 'DD-MM-YYYY') : moment());
+  const [deathDate, setDeathDate] = useState(person ? (isPersonDead ? moment(person.death, 'DD-MM-YYYY') : moment()) : moment());
   const transitionClass = isVisible ? '' : 'add-person-form--hidden';
 
   const onFormSubmit = () => {
     const newPerson = {
       name,
-      surname,
-      dateOfBirth: birthDate.format('DD-MM-YYYY'),
-      dateOfDeath: enableDeathPicker ? deathDate.format('DD-MM-YYYY') : '',
+      lastName,
+      birth: birthDate.format('DD-MM-YYYY'),
+      death: enableDeathPicker ? deathDate.format('DD-MM-YYYY') : '',
       children: [],
       id: person?.id,
     };
@@ -43,9 +43,9 @@ export function PersonForm({isVisible, onSubmit, label, person, icon}) {
         <TextField
           className='add-person-form__item'
           label={'Last Name'}
-          value={surname}
+          value={lastName}
           fullWidth
-          onChange={({target}) => setSurname(target.value)}
+          onChange={({target}) => setlastName(target.value)}
         />
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DatePicker
@@ -94,9 +94,9 @@ PersonForm.propTypes = {
   label: PropTypes.string.isRequired,
   person: PropTypes.shape({
     name: PropTypes.string,
-    surname: PropTypes.string,
-    dateOfBirth: PropTypes.string,
-    dateOfDeath: PropTypes.string,
+    lastName: PropTypes.string,
+    birth: PropTypes.string,
+    death: PropTypes.string,
   }),
   icon: PropTypes.node.isRequired,
 };

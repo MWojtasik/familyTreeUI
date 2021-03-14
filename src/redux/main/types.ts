@@ -1,4 +1,4 @@
-import {Edge} from "react-flow-renderer";
+import { Edge } from 'react-flow-renderer';
 
 export const START_FETCHING_DATA = 'START_FETCHING_DATA';
 export const FETCHING_DATA_FAILURE = 'FETCHING_DATA_FAILURE';
@@ -8,45 +8,49 @@ export const REMOVE_EDGE = 'REMOVE_EDGE';
 export const OPEN_EDIT_DIALOG = 'OPEN_EDIT_DIALOG';
 export const CLOSE_EDIT_DIALOG = 'CLOSE_EDIT_DIALOG';
 
+export type State = {
+  main: MainState,
+};
+
 export type MainState = Readonly<{
-    elements: ReadonlyArray<object>,
-    isFetchingData: boolean,
-    isEditDialogOpen: boolean,
-}>
+  elements: ReadonlyArray<object>,
+  isFetchingData: boolean,
+  isEditDialogOpen: boolean,
+}>;
 
 export type RootState = {
-    main: MainState,
-}
+  main: MainState,
+};
 
 interface OpenEditDialogAction {
-    type: typeof OPEN_EDIT_DIALOG,
+  type: typeof OPEN_EDIT_DIALOG,
 }
 
 interface CloseEditDialogAction {
-    type: typeof CLOSE_EDIT_DIALOG,
+  type: typeof CLOSE_EDIT_DIALOG,
 }
 
 interface AddEdgeAction {
-    type: typeof ADD_EDGE,
-    payload: Edge,
+  type: typeof ADD_EDGE,
+  payload: Edge,
 }
 
 interface RemoveEdgeAction {
-    type: typeof REMOVE_EDGE,
-    payload: Edge,
+  type: typeof REMOVE_EDGE,
+  payload: Edge,
 }
 
 interface SetElementsAction {
-    type: typeof SET_ELEMENTS,
-    payload: object[]
+  type: typeof SET_ELEMENTS,
+  payload: object[]
 }
 
 interface StartFetchingDataAction {
-    type: typeof START_FETCHING_DATA,
+  type: typeof START_FETCHING_DATA,
 }
 
 interface FetchingDataFailureAction {
-    type: typeof FETCHING_DATA_FAILURE,
+  type: typeof FETCHING_DATA_FAILURE,
 }
 
 export type MainActionTypes =

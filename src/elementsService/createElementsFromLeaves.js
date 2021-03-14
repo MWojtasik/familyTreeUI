@@ -1,5 +1,5 @@
 import {createEdge} from 'src/elementsService/createEdge.js';
-import {createElement} from 'src/elementsService/createElement.js';
+import {createElement} from 'src/elementsService/createElement.ts';
 
 const getNodeIndexInElements = (elements, node) => elements.findIndex((element) => element.id === `${node.id}`);
 

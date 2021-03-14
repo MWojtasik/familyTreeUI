@@ -8,29 +8,25 @@ import {
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {useDispatch, useSelector} from 'react-redux';
 import {openEditDialog, setElements} from 'src/redux/main/mainActions.ts';
-import {endpoints} from 'src/endpoints.js';
 import {removeElement} from 'src/elementsService/removeElement.js';
 import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
 
 export const CustomNode = memo(({data}) => {
   const elements = useSelector(state => state.main.elements);
-  const {name, surname, dateOfBirth, dateOfDeath, id} = data;
+  const {name, lastName, birth, death, id} = data;
   const dispatch = useDispatch();
 
-  const deadClassName = dateOfDeath ? 'custom-node--dead' : '';
+  const deadClassName = death ? 'custom-node--dead' : '';
 
   const dates = useMemo(() => {
-    if (dateOfDeath) return `${dateOfBirth} - ${dateOfDeath}`;
-    return `${dateOfBirth}`;
-  }, [dateOfBirth, dateOfDeath]);
+    if (death) return `${birth} - ${death}`;
+    return `${birth}`;
+  }, [birth, death]);
 
   const onRemove = () => {
     const updatedElements = removeElement(elements, id);
-    endpoints.removePerson(id)
-      .then(() => {
-        dispatch(setElements(updatedElements));
-      });
+    dispatch(setElements(updatedElements));
   };
 
   return (
@@ -56,7 +52,7 @@ export const CustomNode = memo(({data}) => {
         </IconButton>
       </div>
       <div>
-        {`${name} ${surname}`}
+        {`${name} ${lastName}`}
       </div>
       <div className='custom-node__dates'>
         {dates}
@@ -72,9 +68,9 @@ export const CustomNode = memo(({data}) => {
 CustomNode.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string,
-    surname: PropTypes.string,
-    dateOfBirth: PropTypes.string,
-    dateOfDeath: PropTypes.string,
+    lastName: PropTypes.string,
+    birth: PropTypes.string,
+    death: PropTypes.string,
     id: PropTypes.string,
   }),
 };

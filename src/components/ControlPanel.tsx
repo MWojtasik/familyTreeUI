@@ -3,31 +3,34 @@ import './ControlPanel.scss';
 import PropTypes from 'prop-types';
 import {Button} from '@material-ui/core';
 import {PersonForm} from 'src/components/PersonForm.jsx';
-import {endpoints} from 'src/endpoints.js';
 import {useDispatch, useSelector} from 'react-redux';
-import {addEdge, getData, removeEdge, setElements} from 'src/redux/main/mainActions.ts';
+import {removeEdge, setElements} from 'src/redux/main/mainActions';
 import {getLayoutedElementsFromLeaves} from 'src/elementsService/getLayoutedElements.js';
 import AddIcon from '@material-ui/icons/Add';
+import {Person} from "../types";
+import {FlowElement, Edge} from "react-flow-renderer";
+import {State} from "../redux/main/types";
 
-export function ControlPanel({selectedNode }) {
-  const elements = useSelector(state => state.main.elements);
+type ControlPanelProps = {
+  selectedNode: FlowElement
+}
+
+export const ControlPanel = ({selectedNode} : ControlPanelProps) => {
+  const elements = useSelector((state: State) => state.main.elements);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const onAddNewPerson = useCallback((person) => {
-    endpoints.addPerson(person)
-      .then(() => {
-        dispatch(getData());
-      });
+  const onAddNewPerson = useCallback((person: Person) => {
+
+    // TODO: dodać kolejny element
+    // endpoints.addPerson(person)
+    //   .then(() => {
+    //     dispatch(getData());
+    //   });
   }, [dispatch]);
 
   const onEdgeRemove = useCallback(() => {
-    dispatch(removeEdge(selectedNode));
-    endpoints.removeConnection(selectedNode.source, selectedNode.target)
-      .catch(() => {
-        console.error('Something went wrong');
-        dispatch(addEdge(selectedNode));
-      });
+      dispatch(removeEdge(selectedNode as Edge));
   }, [dispatch, selectedNode]);
 
   const onCleanLayout = () => {
@@ -37,7 +40,7 @@ export function ControlPanel({selectedNode }) {
   const edgeRemovalPanel = useMemo(() => {
     if (!selectedNode) return null;
 
-    if (selectedNode.source) return (
+    if ("source" in selectedNode) return (
       <Button
         variant="contained"
         color="primary"
@@ -81,9 +84,9 @@ ControlPanel.propTypes = {
     type: PropTypes.string,
     data: PropTypes.shape({
       name: PropTypes.string,
-      surname: PropTypes.string,
-      dateOfBirth: PropTypes.string,
-      dateOfDeath: PropTypes.string,
+      lastName: PropTypes.string,
+      birth: PropTypes.string,
+      death: PropTypes.string,
       id: PropTypes.string,
     }),
     position: PropTypes.shape({
