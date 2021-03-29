@@ -1,13 +1,13 @@
-import {mainInitialState} from './mainInitialState';
+import { Edge } from 'react-flow-renderer';
+import { mainInitialState } from './mainInitialState';
 import {
   ADD_EDGE, CLOSE_EDIT_DIALOG,
   FETCHING_DATA_FAILURE, MainActionTypes, MainState,
   OPEN_EDIT_DIALOG,
   REMOVE_EDGE,
   SET_ELEMENTS,
-  START_FETCHING_DATA
+  START_FETCHING_DATA,
 } from './types';
-import {Edge} from 'react-flow-renderer';
 
 export function mainReducer(state: MainState, action: MainActionTypes) {
   if (typeof state === 'undefined') {
@@ -31,11 +31,11 @@ export function mainReducer(state: MainState, action: MainActionTypes) {
   case ADD_EDGE:
     return {
       ...state,
-      elements: [...state.elements, action.payload]
+      elements: [...state.elements, action.payload],
     };
   case REMOVE_EDGE: {
     const newElements = state.elements.filter(
-      (element: Edge ) => !(element.source === action.payload.source && element.target === action.payload.target)
+      (element: Edge) => !(element.source === action.payload.source && element.target === action.payload.target),
     );
     return {
       ...state,
@@ -50,7 +50,7 @@ export function mainReducer(state: MainState, action: MainActionTypes) {
   case CLOSE_EDIT_DIALOG:
     return {
       ...state,
-      isEditDialogOpen: false
+      isEditDialogOpen: false,
     };
   }
 

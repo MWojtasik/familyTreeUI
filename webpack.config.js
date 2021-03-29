@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 require('dotenv').config();
+
+const prod = !!process.env.PROD;
 
 module.exports = {
   entry: './src/index.js',
@@ -19,6 +24,10 @@ module.exports = {
       base: '/',
       template: path.resolve(__dirname, 'src/index.html'),
     }),
+    new MiniCssExtractPlugin({
+      filename: prod ? '[name].[hash].css' : '[name].css',
+      chunkFilename: prod ? '[id].[hash].css' : '[id].css',
+    })
   ],
   devtool: 'inline-source-map',
   devServer: {

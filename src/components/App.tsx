@@ -1,5 +1,7 @@
-import React, {MouseEvent, ReactElement, useRef, useState} from 'react';
-import './App.scss';
+import React, {
+  MouseEvent, ReactElement, useRef, useState,
+} from 'react';
+import './App.styles.scss';
 import ReactFlow, {
   Background,
   Connection,
@@ -7,17 +9,17 @@ import ReactFlow, {
   Edge,
   FlowElement,
   MiniMap,
-  OnLoadParams
+  OnLoadParams,
 } from 'react-flow-renderer';
-import {Provider, useDispatch, useSelector} from 'react-redux';
-import {State} from '../redux/main/types';
-import {createEdge} from '../elementsService/createEdge';
-import {addEdge} from '../redux/main/mainActions';
-import {store} from '../redux/store';
-import {StylesProvider} from '@material-ui/styles';
-import {CustomNode} from './CustomNode';
-import {ControlPanel} from './ControlPanel';
-import {EditDialog} from './EditDialog';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { StylesProvider } from '@material-ui/styles';
+import { State } from '../redux/main/types';
+import { createEdge } from '../elementsService/createEdge';
+import { addEdge } from '../redux/main/mainActions';
+import { store } from '../redux/store';
+import { CustomNode } from './CustomNode/CustomNode';
+import { ControlPanel } from './ControlPanel/ControlPanel';
+import { EditDialog } from './EditDialog/EditDialog';
 
 const onLoad = (reactFlowInstance: OnLoadParams) => {
   reactFlowInstance.fitView();
@@ -41,29 +43,29 @@ export const App = (): ReactElement => {
   return (
     <Provider store={store}>
       <StylesProvider injectFirst>
-        <div className='App' ref={componentRef}>
+        <div className="App" ref={componentRef}>
           <ReactFlow
             elements={elements}
-            elementsSelectable={true}
+            elementsSelectable
             onConnect={onConnect}
             onLoad={onLoad}
             onElementClick={onSelectElement}
-            snapToGrid={true}
+            snapToGrid
             snapGrid={[15, 15]}
             connectionLineType={ConnectionLineType.SmoothStep}
-            nodeTypes={{personNode: CustomNode}}
+            nodeTypes={{ personNode: CustomNode }}
             style={{ background: '#1A192B' }}
           >
-            <ControlPanel selectedNode={selectedNode}/>
+            <ControlPanel selectedNode={selectedNode} />
             <MiniMap
-              nodeStrokeColor={() => {return '#000000';}}
-              nodeColor={() => {return '#FFFFFF';}}
+              nodeStrokeColor={() => '#000000'}
+              nodeColor={() => '#FFFFFF'}
             />
             <Controls />
             <Background color="#aaa" gap={16} />
           </ReactFlow>
         </div>
-        <EditDialog selectedNode={selectedNode}/>
+        <EditDialog selectedNode={selectedNode} />
       </StylesProvider>
     </Provider>
   );

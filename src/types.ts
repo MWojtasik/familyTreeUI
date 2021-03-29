@@ -1,7 +1,8 @@
-
 export type Person = {
-    name: string,
-    lastName: string,
-    birth: string,
-    death: string,
-}
+  id?: string,
+  name: string,
+  lastName: string,
+  birth: string,
+  death: string,
+  children: Person[],
+};

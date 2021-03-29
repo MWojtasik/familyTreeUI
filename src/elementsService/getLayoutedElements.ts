@@ -1,10 +1,10 @@
 import dagre from 'dagre';
-import {isNode} from 'react-flow-renderer';
+import { Elements, isNode, Position } from 'react-flow-renderer';
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-export const getLayoutedElementsFromLeaves = (elements, direction = 'TB') => {
+export const getLayoutedElementsFromLeaves = (elements: Elements, direction = 'TB'): Elements => {
   const isHorizontal = direction === 'LR';
   dagreGraph.setGraph({ rankdir: direction });
   elements.forEach((el) => {
@@ -18,8 +18,8 @@ export const getLayoutedElementsFromLeaves = (elements, direction = 'TB') => {
   return elements.map((el) => {
     if (isNode(el)) {
       const nodeWithPosition = dagreGraph.node(el.id);
-      el.targetPosition = isHorizontal ? 'left' : 'top';
-      el.sourcePosition = isHorizontal ? 'right' : 'bottom';
+      el.targetPosition = isHorizontal ? Position.Left : Position.Top;
+      el.sourcePosition = isHorizontal ? Position.Right : Position.Bottom;
       // unfortunately we need this little hack to pass a slighltiy different position
       // in order to notify react flow about the change
       el.position = {
@@ -30,4 +30,3 @@ export const getLayoutedElementsFromLeaves = (elements, direction = 'TB') => {
     return el;
   });
 };
-
